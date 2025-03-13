@@ -1,0 +1,140 @@
+Round 1: HackerRank Coding
+Kubernetes Manifest File Scenario
+
+Key Points / Explanation:
+Understanding basic K8s objects: Pods, Deployments, Services, ConfigMaps, etc.
+Possibly writing or debugging a deployment.yaml or service.yaml.
+What to Prepare:
+Familiarize yourself with YAML syntax for common K8s resources (Deployment, Service).
+Know how to set replicas, container images, environment variables, and resource requests/limits.
+Python DCA (Data Cleansing/Analysis) Questions
+
+Key Points / Explanation:
+Likely involves reading data from a file or stream, cleaning the data, and performing analysis (e.g., counting, filtering).
+Could involve Python libraries like pandas or basic string manipulation with loops and conditionals.
+What to Prepare:
+Practice reading from CSV/JSON, filtering data, and outputting results.
+Familiarity with list comprehensions, error handling, and dictionary operations.
+Linux Log File Processing Scenarios
+
+Key Points / Explanation:
+Parsing system/application logs using Bash tools like grep, awk, sed.
+Possibly summarizing logs or extracting certain fields.
+What to Prepare:
+Practice with common commands to filter and transform log data.
+Know how to use regex in grep and how to handle multi-line logs.
+Tip: During a coding assessment, ensure your solutions are clean, well-documented, and handle edge cases.
+
+Round 2: Real-Time Scenarios
+Master Node and Worker Node Firewall Ports Blocked
+
+Scenario: Firewall rules suddenly block communication between the control plane (master) and worker nodes.
+Key Points / Explanation:
+K8s components communicate over specific ports (e.g., 6443 for API server).
+If these ports are blocked, nodes might show “NotReady,” new deployments could fail, existing pods might remain running but can’t be managed.
+Example Answer Approach:
+Impact Analysis: Check cluster status (kubectl get nodes) to see which nodes are unreachable.
+Communication: Immediately inform stakeholders that new deployments may be affected.
+Resolution: Update firewall rules to allow necessary K8s traffic, verify connectivity with telnet or nc.
+Preventive Measures: Implement automated checks (e.g., scripts or Prometheus alerts) to detect firewall changes.
+AWS EKS Master Node Goes Down
+
+Scenario: Hypothetical situation where the EKS control plane becomes unavailable.
+Key Points / Explanation:
+AWS manages the control plane for EKS, so direct user access to master nodes is not typical.
+If control plane is down, cluster operations (e.g., scaling, new deployments) won’t work, but existing pods might keep running.
+Example Answer Approach:
+Check AWS Health Dashboard or EKS console for any region-specific outages.
+Failover Plan: Potentially have a multi-region or multi-AZ setup for critical workloads.
+Escalation: Open a support ticket with AWS if it’s a managed control plane issue.
+Communication: Notify teams about partial cluster unavailability and provide timelines for recovery.
+How AWS Classic Load Balancer (CLB) Works
+
+Key Points / Explanation:
+Basic L4 (TCP) or L7 (HTTP) load balancing.
+Distributes incoming requests to registered EC2 instances in one or more Availability Zones.
+Example Answer Approach:
+Discuss how it routes traffic based on listener rules, health checks, session stickiness, and how it differs from ALB (Application Load Balancer) or NLB (Network Load Balancer).
+SLI, SLO, SLA
+
+Key Points / Explanation:
+SLI (Service Level Indicator): A metric measuring performance (e.g., latency, availability).
+SLO (Service Level Objective): The target or threshold for that metric (e.g., 99.9% availability).
+SLA (Service Level Agreement): Formal contract with consequences if the SLO is not met.
+Example Answer Approach:
+Provide a quick example: SLI = 99.95% uptime last month, SLO = 99.9% target, SLA = financial penalty if < 99.9%.
+Existing Extensions in Grafana/Kibana Are Done—What Else is Left?
+
+Key Points / Explanation:
+Possibly set up alerting, notifications, or advanced data correlation.
+Evaluate if logs and metrics alone are sufficient or if tracing (Jaeger, Zipkin) is needed.
+Example Answer Approach:
+Add Alerting/Notifications: Configure Grafana or Kibana watchers to notify Slack/Email.
+Set Up Tracing: For microservices, distributed tracing is crucial.
+Close Observability Gaps: Check for log coverage, metric completeness, and capacity planning dashboards.
+On-Prem Logging Solutions (Splunk, DataDog) Integration
+
+Key Points / Explanation:
+Collect logs from on-prem sources or from cloud-based systems, unify them in a single platform.
+Possibly forward logs using agents (Fluentd, Logstash, etc.).
+Example Answer Approach:
+Discuss how to configure log forwarders to push data to Splunk/DataDog.
+Consider security, data encryption, and indexing strategies.
+Gathering Data from Logs and Collecting in a Pipeline
+
+Key Points / Explanation:
+End-to-end pipeline might involve filebeat/fluentd → log aggregator → processing (Logstash) → storage (Elasticsearch, Splunk).
+Example Answer Approach:
+Log Collection: Agents on each node or sidecar containers.
+Central Aggregation: Use a message queue or direct ingestion into a logging platform.
+Analysis/Visualization: Kibana, Grafana, Splunk dashboards.
+Alerting: Automated alerts for anomalies or threshold breaches.
+Round 3: More Advanced Topics
+Istio Setup for Kubernetes Cluster
+
+Key Points / Explanation:
+Istio is a service mesh providing traffic management, observability, and security.
+Typical steps: install Istio using Helm or Istioctl, enable sidecar injection, configure virtual services and gateways.
+Example Answer Approach:
+Outline how to install Istio in the istio-system namespace, label namespaces for sidecar injection, and set up traffic routing rules via VirtualService and DestinationRule.
+AWS EventBridge Scenario and Terraform Setup
+
+Key Points / Explanation:
+EventBridge routes events from AWS services (or custom apps) to targets like Lambda, SQS, etc.
+Terraform can be used to define EventBridge rules, targets, and permissions.
+Example Answer Approach:
+Terraform Resources: aws_cloudwatch_event_rule, aws_cloudwatch_event_target, aws_lambda_permission.
+Use Cases: Trigger a Lambda when an S3 file is uploaded, or a scheduled event.
+Testing & Validation: Confirm event triggers in the AWS console or logs.
+Lambda Setup for Parsing Data and Ingestion
+
+Key Points / Explanation:
+Commonly used for serverless data processing pipelines (e.g., read from S3, transform, store in DynamoDB).
+Example Answer Approach:
+Discuss function code structure, environment variables, memory/time limits, concurrency settings.
+Emphasize error handling, logging, and use of CloudWatch for monitoring.
+Building a New Microservice and the Steps to Follow
+
+Key Points / Explanation:
+Typical CI/CD pipeline: code repo (Git) → build (e.g., Jenkins/GitLab CI) → containerize (Docker) → deploy (Kubernetes).
+Observability (logs, metrics, traces) from the start.
+Example Answer Approach:
+Design & Architecture: Identify endpoints, data flows, schema.
+Containerization & Deployment: Dockerfile, helm chart or k8s manifests.
+CI/CD Integration: Automated tests, lint checks, security scans, deployment to staging and production.
+Monitoring & Alerting: Set up dashboards, logs, metrics, distributed tracing.
+Scalability & Resilience: Horizontal Pod Autoscaler, readiness/liveness probes.
+General Tips for Interview Preparation
+Know Your K8s Basics: Control plane components, node roles, common ports, networking, and load balancing.
+Be Comfortable with AWS Services: EKS, ELB, EventBridge, Lambda, and how they integrate.
+Observability & Logging: Explain end-to-end pipelines for logs and metrics, including tooling (Grafana, Kibana, Splunk, Datadog).
+DevOps Concepts: Emphasize automation (Terraform, CI/CD), SLI/SLO/SLA, and the significance of post-incident reviews.
+Service Mesh & Microservices: If asked about Istio, highlight traffic routing, security, and zero-trust principles.
+Stay Calm & Structured: For scenario-based questions, clearly articulate the problem, steps to diagnose, resolution, and preventive measures.
+Final Note
+Use this breakdown to structure your study and responses. Combine real-life experiences with theoretical best practices. Show not only that you can code and configure but also that you understand the why behind each decision—this balance of technical depth and high-level reasoning often impresses interviewers.
+
+
+
+
+
